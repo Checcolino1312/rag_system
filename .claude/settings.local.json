@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python setup_test_doc.py:*)",
+      "Bash(python -c:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker info:*)",
+      "Bash(timeout:*)",
+      "Bash(docker logs:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(dir \"C:\\Users\\cicci\\OneDrive\\Desktop\\rag\\src\")",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

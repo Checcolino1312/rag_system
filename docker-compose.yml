@@ -1,0 +1,40 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: rag-mongodb
+    restart: unless-stopped
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - rag-network
+
+  rag-app:
+    build: .
+    container_name: rag-app
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CHUNK_SIZE=500
+      - CHUNK_OVERLAP=50
+      - TOP_K=5
+      - EMBEDDING_MODEL=text-embedding-3-small
+      - CHAT_MODEL=gpt-4o-mini
+      - TEMPERATURE=0.3
+    volumes:
+      - ./knowledge_base:/app/knowledge_base
+    depends_on:
+      - mongodb
+    networks:
+      - rag-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  rag-network:
+    driver: bridge
