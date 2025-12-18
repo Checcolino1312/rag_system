@@ -48,7 +48,9 @@ Sistema RAG (Retrieval-Augmented Generation) per interrogare documenti utilizzan
 ## Prerequisiti
 
 - Python 3.8+
-- MongoDB Atlas account (o MongoDB locale)
+- **MongoDB** (scegli una delle due opzioni):
+  - MongoDB locale + MongoDB Compass (consigliato per sviluppo)
+  - MongoDB Atlas (cloud, consigliato per produzione)
 - OpenAI API Key
 - Docker e Docker Compose (opzionale, per deployment containerizzato)
 
@@ -91,8 +93,11 @@ cp .env.example .env
 # OpenAI API Key
 OPENAI_API_KEY=sk-your-api-key-here
 
-# MongoDB Atlas Connection String
-MONGODB_URI=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/
+# MongoDB Connection String (scegli una delle due opzioni)
+# Opzione 1 - Locale (con Docker Compose):
+MONGODB_URI=mongodb://localhost:27020/
+# Opzione 2 - Atlas (Cloud):
+# MONGODB_URI=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/
 
 # Configurazione RAG (opzionale)
 CHUNK_SIZE=500
@@ -110,7 +115,14 @@ TEMPERATURE=0.3
 2. Crea una nuova API key
 3. Copia la chiave nel file `.env`
 
-**MongoDB Atlas:**
+**MongoDB - Opzione 1: Locale con Docker Compose (Consigliato per iniziare)**
+1. Usa `docker-compose up -d` per avviare MongoDB in locale
+2. MongoDB sarà disponibile su `localhost:27020`
+3. Usa MongoDB Compass per visualizzare i dati:
+   - Scarica Compass da https://www.mongodb.com/products/compass
+   - Connettiti a `mongodb://localhost:27020/`
+
+**MongoDB - Opzione 2: Atlas (Cloud)**
 1. Crea un account su https://www.mongodb.com/cloud/atlas
 2. Crea un cluster gratuito
 3. Ottieni la connection string
@@ -280,7 +292,13 @@ docker-compose down -v
 
 ## Troubleshooting
 
-### Errore di connessione MongoDB
+### Errore di connessione MongoDB (Locale)
+- Verifica che Docker Compose sia in esecuzione: `docker-compose ps`
+- Controlla che la porta 27020 non sia in uso: `netstat -an | findstr 27020`
+- Riavvia il container: `docker-compose restart mongodb`
+- Verifica i logs: `docker-compose logs mongodb`
+
+### Errore di connessione MongoDB (Atlas)
 - Verifica che la connection string in `.env` sia corretta
 - Controlla che l'IP sia whitelistato su MongoDB Atlas
 - Verifica le credenziali username/password
