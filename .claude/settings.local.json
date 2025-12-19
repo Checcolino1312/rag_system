@@ -11,7 +11,10 @@
       "WebFetch(domain:localhost)",
       "Bash(dir \"C:\\Users\\cicci\\OneDrive\\Desktop\\rag\\src\")",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git stash:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }

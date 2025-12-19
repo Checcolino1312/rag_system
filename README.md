@@ -21,7 +21,7 @@ Sistema RAG (Retrieval-Augmented Generation) per interrogare documenti utilizzan
        │
        ▼
 ┌─────────────────┐
-│  Loader + Chunker│
+│ Loader + Chunker│
 └──────┬──────────┘
        │
        ▼
